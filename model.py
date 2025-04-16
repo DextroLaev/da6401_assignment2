@@ -1,28 +1,42 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from config import *
+from torch.utils.data import DataLoader
+import wandb
 
 class Classifier_Model(nn.Module):
     def __init__(self,out_classes=10,cn1_filters=32,cn1_kernel_size=3,
                 cn2_filters=64,cn2_kernel_size=3,
                 cn3_filters=128,cn3_kernel_size=3,
                 cn4_filters=256,cn4_kernel_size=3,
-                cn5_filters=512,cn5_kernel_size=3,
-                n_dense_input_neuron = 1000,
+                cn5_filters=512,cn5_kernel_size=3,                
                 n_dense_output_neuron = 2046,
                 activation='relu',
                 filter_organisation='same',
                 batch_normalization='yes',
                 dropout=0.5,
-                input_shape=(400,400)
+                input_shape=(400,400),
+                output_shape=10
                 ):
         super(Classifier_Model,self).__init__()
+        base = cn1_filters if cn1_filters is not None else 32
 
-        self.cn1 = nn.Conv2d(in_channels=3,out_channels=cn1_filters,kernel_size=cn1_kernel_size,padding=1)
-        self.cn2 = nn.Conv2d(in_channels=cn1_filters,out_channels=cn2_filters,kernel_size=cn2_kernel_size,padding=1)
-        self.cn3 = nn.Conv2d(in_channels=cn2_filters,out_channels=cn3_filters,kernel_size=cn3_kernel_size,padding=1)
-        self.cn4 = nn.Conv2d(in_channels=cn3_filters,out_channels=cn4_filters,kernel_size=cn4_kernel_size,padding=1)
-        self.cn5 = nn.Conv2d(in_channels=cn4_filters,out_channels=cn5_filters,kernel_size=cn5_kernel_size,padding=1)
+        if filter_organisation in ['same', 'double', 'half']:
+            if filter_organisation == 'same':
+                filters = [base] * 5
+            elif filter_organisation == 'double':
+                filters = [base * (2 ** i) for i in range(5)]
+            elif filter_organisation == 'half':
+                filters = [max(1, base // (2 ** i)) for i in range(5)]
+        else:
+            raise ValueError(f"Unknown filter_organisation: {filter_organisation}")
+
+        self.cn1 = nn.Conv2d(in_channels=3, out_channels=filters[0], kernel_size=cn1_kernel_size, padding=1)
+        self.cn2 = nn.Conv2d(in_channels=filters[0], out_channels=filters[1], kernel_size=cn2_kernel_size, padding=1)
+        self.cn3 = nn.Conv2d(in_channels=filters[1], out_channels=filters[2], kernel_size=cn3_kernel_size, padding=1)
+        self.cn4 = nn.Conv2d(in_channels=filters[2], out_channels=filters[3], kernel_size=cn4_kernel_size, padding=1)
+        self.cn5 = nn.Conv2d(in_channels=filters[3], out_channels=filters[4], kernel_size=cn5_kernel_size, padding=1)
 
         self.max_pool = nn.MaxPool2d(kernel_size=2,stride=2)
         self.is_batch_normalization = batch_normalization
@@ -39,19 +53,20 @@ class Classifier_Model(nn.Module):
         }
         self.activation = activation_map[activation]
         if batch_normalization:
-            self.bn1 = nn.BatchNorm2d(cn1_filters)
-            self.bn2 = nn.BatchNorm2d(cn2_filters)
-            self.bn3 = nn.BatchNorm2d(cn3_filters)
-            self.bn4 = nn.BatchNorm2d(cn4_filters)
-            self.bn5 = nn.BatchNorm2d(cn5_filters)
+            self.bn1 = nn.BatchNorm2d(filters[0])
+            self.bn2 = nn.BatchNorm2d(filters[1])
+            self.bn3 = nn.BatchNorm2d(filters[2])
+            self.bn4 = nn.BatchNorm2d(filters[3])
+            self.bn5 = nn.BatchNorm2d(filters[4])
 
         self.flatten = nn.Flatten()        
         self.final_height, self.final_width = self._calculate_output_size(input_shape)
-        self.dense_input_features = cn5_filters * self.final_height * self.final_width
+        self.dense_input_features = filters[4] * self.final_height * self.final_width
 
         self.dense_layer = nn.Linear(self.dense_input_features, n_dense_output_neuron)
         self.output_layer = nn.Linear(n_dense_output_neuron,out_classes)
         self.dropout = nn.Dropout(dropout)
+        self.to(DEVICE)
     
     def apply_conv_pass(self,x,conv_layer,batch_norm):
         x = conv_layer(x)
@@ -86,3 +101,85 @@ class Classifier_Model(nn.Module):
 
         out = self.output_layer(x)
         return out
+
+    def train_network(self, train_data, val_data, test_data, batch_size=32, lr=1e-5, weight_decay=0.0, epochs=1000,
+                  model_save_path='./models/model.pth', early_stopping_patience=10):        
+        
+
+        train_data = DataLoader(train_data, batch_size=batch_size, shuffle=True)
+        val_data = DataLoader(val_data, batch_size=1, shuffle=False)
+        test_data = DataLoader(test_data, batch_size=1, shuffle=False)
+
+        loss_func = torch.nn.CrossEntropyLoss()        
+        optimizer = torch.optim.Adam(self.parameters(), lr=lr, weight_decay=weight_decay)    
+
+        best_val_loss = float('inf')
+        patience_counter = 0
+
+        for ep in range(epochs):
+            self.train() 
+            total_loss_train = 0
+            acc = 0
+            total_train = 0
+
+            for i, (img, label) in enumerate(train_data):
+                img = img.to(DEVICE)
+                label = label.to(DEVICE)
+
+                output = self.forward(img)
+                loss = loss_func(output, label)
+
+                optimizer.zero_grad()
+                loss.backward()
+                optimizer.step()
+
+                total_loss_train += loss.item()
+                pred = output.argmax(dim=1, keepdim=True)
+                acc += pred.eq(label.view_as(pred)).sum().item()
+                total_train += label.size(0)
+
+            train_loss_avg = total_loss_train / len(train_data)
+            train_acc = 100. * acc / total_train
+
+            self.eval()
+            with torch.no_grad():
+                total_loss_val = 0
+                correct_val = 0
+
+                for data, label in val_data:
+                    data = data.to(DEVICE)
+                    label = label.to(DEVICE)
+
+                    out = self.forward(data)
+                    total_loss_val += loss_func(out, label).item()
+                    pred = out.argmax(dim=1, keepdim=True)
+                    correct_val += pred.eq(label.view_as(pred)).sum().item()
+
+                val_loss_avg = total_loss_val / len(val_data)
+                val_acc = 100. * correct_val / len(val_data.dataset)
+
+            print(f'Epoch [{ep+1}/{epochs}], Train Loss: {train_loss_avg:.4f}, Train Acc: {train_acc:.2f}%, Val Loss: {val_loss_avg:.4f}, Val Acc: {val_acc:.2f}%')
+
+            # Log to wandb
+            wandb.log({
+                "epoch": ep+1,
+                "train_loss": train_loss_avg,
+                "train_acc": train_acc,
+                "val_loss": val_loss_avg,
+                "val_acc": val_acc
+            })
+
+            # Early stopping and model saving
+            if val_loss_avg < best_val_loss:
+                best_val_loss = val_loss_avg
+                patience_counter = 0
+                torch.save(self.state_dict(), model_save_path)
+                print("Model saved at epoch {} with val loss {:.4f}".format(ep+1, val_loss_avg))
+            else:
+                patience_counter += 1
+                if patience_counter >= early_stopping_patience:
+                    print("Early stopping triggered at epoch {}".format(ep+1))
+                    break
+
+        wandb.finish()
+
