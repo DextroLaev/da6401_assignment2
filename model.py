@@ -19,18 +19,21 @@ class Classifier_Model(nn.Module):
                 input_shape=(400,400),
                 output_shape=10
                 ):
-        super(Classifier_Model,self).__init__()
-        base = cn1_filters if cn1_filters is not None else 32
+        super(Classifier_Model,self).__init__()        
 
         if filter_organisation in ['same', 'double', 'half']:
             if filter_organisation == 'same':
+                base = 64
                 filters = [base] * 5
             elif filter_organisation == 'double':
+                base = 32
                 filters = [base * (2 ** i) for i in range(5)]
             elif filter_organisation == 'half':
+                base = 512
                 filters = [max(1, base // (2 ** i)) for i in range(5)]
         else:
-            raise ValueError(f"Unknown filter_organisation: {filter_organisation}")
+            filters = [cn1_filters,cn2_filters,cn3_filters,cn4_filters,cn5_filters]
+            # raise ValueError(f"Unknown filter_organisation: {filter_organisation}")
 
         self.cn1 = nn.Conv2d(in_channels=3, out_channels=filters[0], kernel_size=cn1_kernel_size, padding=1)
         self.cn2 = nn.Conv2d(in_channels=filters[0], out_channels=filters[1], kernel_size=cn2_kernel_size, padding=1)
@@ -49,7 +52,7 @@ class Classifier_Model(nn.Module):
             'softmax':nn.Softmax(),
             'silu':nn.SiLU(),
             'mish':nn.Mish(),
-            'leaky_rule':nn.LeakyReLU()
+            'leaky_relu':nn.LeakyReLU()
         }
         self.activation = activation_map[activation]
         if batch_normalization:
@@ -103,12 +106,11 @@ class Classifier_Model(nn.Module):
         return out
 
     def train_network(self, train_data, val_data, test_data, batch_size=32, lr=1e-5, weight_decay=0.0, epochs=1000,
-                  model_save_path='./models/model.pth', early_stopping_patience=10):        
+                  model_save_path='./models/model.pth', early_stopping_patience=10,log=False):        
         
-
-        train_data = DataLoader(train_data, batch_size=batch_size, shuffle=True)
-        val_data = DataLoader(val_data, batch_size=1, shuffle=False)
-        test_data = DataLoader(test_data, batch_size=1, shuffle=False)
+        train_data = DataLoader(train_data, batch_size=batch_size, shuffle=True,num_workers=0)
+        val_data = DataLoader(val_data, batch_size=1, shuffle=False,num_workers=0)
+        test_data = DataLoader(test_data, batch_size=1, shuffle=False,num_workers=0)
 
         loss_func = torch.nn.CrossEntropyLoss()        
         optimizer = torch.optim.Adam(self.parameters(), lr=lr, weight_decay=weight_decay)    
@@ -140,7 +142,7 @@ class Classifier_Model(nn.Module):
 
             train_loss_avg = total_loss_train / len(train_data)
             train_acc = 100. * acc / total_train
-
+            torch.cuda.empty_cache()
             self.eval()
             with torch.no_grad():
                 total_loss_val = 0
@@ -157,17 +159,19 @@ class Classifier_Model(nn.Module):
 
                 val_loss_avg = total_loss_val / len(val_data)
                 val_acc = 100. * correct_val / len(val_data.dataset)
+                torch.cuda.empty_cache()
 
             print(f'Epoch [{ep+1}/{epochs}], Train Loss: {train_loss_avg:.4f}, Train Acc: {train_acc:.2f}%, Val Loss: {val_loss_avg:.4f}, Val Acc: {val_acc:.2f}%')
-
+            
             # Log to wandb
-            wandb.log({
-                "epoch": ep+1,
-                "train_loss": train_loss_avg,
-                "train_acc": train_acc,
-                "val_loss": val_loss_avg,
-                "val_acc": val_acc
-            })
+            if log:
+                wandb.log({
+                    "epoch": ep+1,
+                    "train_loss": train_loss_avg,
+                    "train_acc": train_acc,
+                    "val_loss": val_loss_avg,
+                    "val_acc": val_acc
+                })
 
             # Early stopping and model saving
             if val_loss_avg < best_val_loss:
@@ -178,7 +182,7 @@ class Classifier_Model(nn.Module):
             else:
                 patience_counter += 1
                 if patience_counter >= early_stopping_patience:
-                    print("Early stopping triggered at epoch {}".format(ep+1))
+                    print("Early stopping triggered at epoch {}".format(ep+1))                    
                     break
 
         wandb.finish()

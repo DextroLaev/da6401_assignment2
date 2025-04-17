@@ -65,7 +65,7 @@ if __name__ == '__main__':
 
     print(optimizer_kwargs)
 
-    train_dataset,val_dataset,test_dataset = load_dataset('../inaturalist_12K/')
+    train_dataset,val_dataset,test_dataset = load_dataset('./inaturalist_12K/')
 
     cn1_filters = args.conv1_filters
     cn2_filters = args.conv2_filters
@@ -78,5 +78,5 @@ if __name__ == '__main__':
                              cn5_kernel_size=3,n_dense_output_neuron=hidden_neurons,filter_organisation='same',batch_normalization='yes',dropout=dropout)
     
     model.train_network(train_data=train_dataset,val_data=val_dataset,test_data=test_dataset,
-                        batch_size=batch_size,lr=lr,weight_decay=weight_decay,early_stopping_patience=patience_counter)
+                        batch_size=batch_size,lr=lr,weight_decay=weight_decay,early_stopping_patience=patience_counter,log=False)
     
