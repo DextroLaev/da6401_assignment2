@@ -1,8 +1,6 @@
 from torchvision import transforms,datasets
-from torch.utils.data import DataLoader, random_split
 
-
-def load_dataset(path,data_aug='no'):
+def load_dataset(path,input_shape = (256,256),data_aug='no'):
     '''
     1. take folder path - > folder = [train,val]
     2. apply preprocessing
@@ -12,37 +10,48 @@ def load_dataset(path,data_aug='no'):
     train_folder = '{}/train/'.format(path)
     test_folder = '{}/val/'.format(path)
 
-    base_transform = transforms.Compose([
-        transforms.Resize((400, 400)),
-        transforms.ToTensor(),
-        transforms.Normalize(mean=[0.485, 0.456, 0.406], 
-                             std=[0.229, 0.224, 0.225])
-    ])
+    if data_aug == 'no':
+        data_transform = transforms.Compose([
+            transforms.Resize(input_shape),
+            transforms.ToTensor(),
+            transforms.Normalize(mean=[0.485, 0.456, 0.406], 
+                                std=[0.229, 0.224, 0.225])
+        ])
     
-    if data_aug == 'yes':
-        train_transform = transforms.Compose([
-            transforms.Resize((400, 400)),
+    elif data_aug == 'yes':
+        data_transform = transforms.Compose([
+            transforms.Resize(input_shape),
             transforms.RandomHorizontalFlip(),
-            transforms.RandomRotation(15),
-            transforms.ColorJitter(brightness=0.2, contrast=0.2, saturation=0.2),
-            transforms.RandomResizedCrop((400, 400), scale=(0.8, 1.0)),
+            transforms.RandomRotation(15),            
             transforms.ToTensor(),
             transforms.Normalize(mean=[0.485, 0.456, 0.406], 
                                  std=[0.229, 0.224, 0.225])
         ])
-    else:
-        train_transform = base_transform
 
 
-    train_dataset_full = datasets.ImageFolder(train_folder, transform=train_transform)
-    test_dataset = datasets.ImageFolder(test_folder, transform=train_transform)
+    train_dataset_full = datasets.ImageFolder(train_folder, transform=data_transform)
+    test_dataset = datasets.ImageFolder(test_folder, transform=data_transform)
+    classes = train_dataset_full.classes
+    
+        # Collect indices per class
+    class_data = {c:[] for c in classes}
 
-    train_size = int(0.8 * len(train_dataset_full))
-    val_size = len(train_dataset_full) - train_size
+    print('Loading Data ....')
+    for data, label in train_dataset_full:
+        class_data[classes[label]].append((data,label))
 
-    train_dataset, val_dataset = random_split(train_dataset_full, [train_size, val_size])
+    train_data = []
+    val_data = []
 
-    return train_dataset, val_dataset, test_dataset
+    for label, data in class_data.items():
+        
+        split = int(0.8 * len(data))
+        train_data.extend(data[:split])
+        val_data.extend(data[split:])
+
+    return train_data, val_data, test_dataset
 
 
     
+if __name__ == '__main__':
+    load_dataset('./inaturalist_12K/')

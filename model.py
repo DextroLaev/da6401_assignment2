@@ -10,30 +10,27 @@ class Classifier_Model(nn.Module):
                 cn2_filters=64,cn2_kernel_size=3,
                 cn3_filters=128,cn3_kernel_size=3,
                 cn4_filters=256,cn4_kernel_size=3,
-                cn5_filters=512,cn5_kernel_size=3,                
+                cn5_filters=512,cn5_kernel_size=3,
+                filter_size = 32,   
                 n_dense_output_neuron = 2046,
                 activation='relu',
                 filter_organisation='same',
                 batch_normalization='yes',
                 dropout=0.5,
-                input_shape=(400,400),
+                input_shape=(256,256),
                 output_shape=10
                 ):
         super(Classifier_Model,self).__init__()        
-
+        base = filter_size
         if filter_organisation in ['same', 'double', 'half']:
             if filter_organisation == 'same':
-                base = 64
                 filters = [base] * 5
             elif filter_organisation == 'double':
-                base = 32
                 filters = [base * (2 ** i) for i in range(5)]
             elif filter_organisation == 'half':
-                base = 512
                 filters = [max(1, base // (2 ** i)) for i in range(5)]
         else:
-            filters = [cn1_filters,cn2_filters,cn3_filters,cn4_filters,cn5_filters]
-            # raise ValueError(f"Unknown filter_organisation: {filter_organisation}")
+            raise ValueError(f"Unknown filter_organisation: {filter_organisation}")
 
         self.cn1 = nn.Conv2d(in_channels=3, out_channels=filters[0], kernel_size=cn1_kernel_size, padding=1)
         self.cn2 = nn.Conv2d(in_channels=filters[0], out_channels=filters[1], kernel_size=cn2_kernel_size, padding=1)
@@ -108,9 +105,8 @@ class Classifier_Model(nn.Module):
     def train_network(self, train_data, val_data, test_data, batch_size=32, lr=1e-5, weight_decay=0.0, epochs=1000,
                   model_save_path='./models/model.pth', early_stopping_patience=10,log=False):        
         
-        train_data = DataLoader(train_data, batch_size=batch_size, shuffle=True,num_workers=0)
-        val_data = DataLoader(val_data, batch_size=1, shuffle=False,num_workers=0)
-        test_data = DataLoader(test_data, batch_size=1, shuffle=False,num_workers=0)
+        train_data = DataLoader(train_data, batch_size=batch_size, shuffle=True)
+        val_data = DataLoader(val_data, batch_size=batch_size, shuffle=True)
 
         loss_func = torch.nn.CrossEntropyLoss()        
         optimizer = torch.optim.Adam(self.parameters(), lr=lr, weight_decay=weight_decay)    
@@ -142,7 +138,6 @@ class Classifier_Model(nn.Module):
 
             train_loss_avg = total_loss_train / len(train_data)
             train_acc = 100. * acc / total_train
-            torch.cuda.empty_cache()
             self.eval()
             with torch.no_grad():
                 total_loss_val = 0
@@ -159,7 +154,6 @@ class Classifier_Model(nn.Module):
 
                 val_loss_avg = total_loss_val / len(val_data)
                 val_acc = 100. * correct_val / len(val_data.dataset)
-                torch.cuda.empty_cache()
 
             print(f'Epoch [{ep+1}/{epochs}], Train Loss: {train_loss_avg:.4f}, Train Acc: {train_acc:.2f}%, Val Loss: {val_loss_avg:.4f}, Val Acc: {val_acc:.2f}%')
             

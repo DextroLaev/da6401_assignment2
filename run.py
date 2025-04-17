@@ -13,7 +13,7 @@ def train():
     
     model = Classifier_Model(out_classes=10,n_dense_output_neuron=2048,activation='relu',cn1_filters=32,cn2_filters=64,
                              cn3_filters=128,cn4_filters=256,cn5_filters=512,
-                             filter_organisation='none',
+                             filter_organisation='double',filter_size=32,
                              batch_normalization='yes',dropout=0.5)
     
     model.train_network(train_data=train_data,
