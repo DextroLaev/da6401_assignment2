@@ -1,0 +1,10 @@
+Loading Data ....
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 9999/9999 [00:40<00:00, 244.05it/s]
+Test Accuracy: 3.12%
+Traceback (most recent call last):
+  File "/home/user/Documents/DL/Assignment2/partA/test.py", line 100, in <module>
+    evaluate_and_visualize(model_path='./models/best_model.pth')
+  File "/home/user/Documents/DL/Assignment2/partA/test.py", line 81, in evaluate_and_visualize
+    img = img.resize((img_width, img_height), Image.ANTIALIAS)
+                                              ^^^^^^^^^^^^^^^
+AttributeError: module 'PIL.Image' has no attribute 'ANTIALIAS'

@@ -1,0 +1,22 @@
+wandb_version: 1
+
+activation_function:
+  value: mish
+batch_normalization:
+  value: true
+batch_size:
+  value: 32
+data_aug:
+  value: true
+dropout:
+  value: 0.2
+filter_organisation:
+  value: double
+filter_size:
+  value: 64
+hidden_neurons:
+  value: 1024
+learning_rate:
+  value: 2.0e-05
+weight_decay:
+  value: 5.0e-05

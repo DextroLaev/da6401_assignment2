@@ -1,0 +1,12 @@
+{"time":"2025-04-18T23:39:58.505917693+05:30","level":"INFO","msg":"stream: starting","core version":"0.19.9","symlink path":"/home/user/Documents/DL/Assignment2/partA/wandb/run-20250418_233958-je1n7nom/logs/debug-core.log"}
+{"time":"2025-04-18T23:39:58.885665337+05:30","level":"INFO","msg":"created new stream","id":"je1n7nom"}
+{"time":"2025-04-18T23:39:58.885690028+05:30","level":"INFO","msg":"stream: started","id":"je1n7nom"}
+{"time":"2025-04-18T23:39:58.885785376+05:30","level":"INFO","msg":"writer: Do: started","stream_id":"je1n7nom"}
+{"time":"2025-04-18T23:39:58.885823968+05:30","level":"INFO","msg":"handler: started","stream_id":"je1n7nom"}
+{"time":"2025-04-18T23:39:58.885840903+05:30","level":"INFO","msg":"sender: started","stream_id":"je1n7nom"}
+{"time":"2025-04-18T23:39:59.178849313+05:30","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-04-18T23:51:06.145113211+05:30","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-04-18T23:51:06.145135725+05:30","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-04-18T23:51:06.592402882+05:30","level":"INFO","msg":"stream: closing","id":"je1n7nom"}
+{"time":"2025-04-18T23:51:06.680697625+05:30","level":"WARN","msg":"sender: received Exit record more than once, ignoring"}
+{"time":"2025-04-18T23:51:08.153466515+05:30","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}

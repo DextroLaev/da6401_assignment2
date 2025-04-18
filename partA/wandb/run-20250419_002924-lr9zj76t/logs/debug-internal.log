@@ -1,0 +1,13 @@
+{"time":"2025-04-19T00:29:24.142970561+05:30","level":"INFO","msg":"stream: starting","core version":"0.19.9","symlink path":"/home/user/Documents/DL/Assignment2/partA/wandb/run-20250419_002924-lr9zj76t/logs/debug-core.log"}
+{"time":"2025-04-19T00:29:24.514329554+05:30","level":"INFO","msg":"created new stream","id":"lr9zj76t"}
+{"time":"2025-04-19T00:29:24.514348009+05:30","level":"INFO","msg":"stream: started","id":"lr9zj76t"}
+{"time":"2025-04-19T00:29:24.514361412+05:30","level":"INFO","msg":"writer: Do: started","stream_id":"lr9zj76t"}
+{"time":"2025-04-19T00:29:24.514402666+05:30","level":"INFO","msg":"handler: started","stream_id":"lr9zj76t"}
+{"time":"2025-04-19T00:29:24.514499125+05:30","level":"INFO","msg":"sender: started","stream_id":"lr9zj76t"}
+{"time":"2025-04-19T00:29:24.821142427+05:30","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-04-19T00:29:48.111921048+05:30","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-04-19T00:29:48.111964872+05:30","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-04-19T00:29:48.375686934+05:30","level":"INFO","msg":"api: retrying HTTP error","status":409,"url":"https://api.wandb.ai/graphql","body":"{\"errors\":[{\"message\":\"run lr9zj76t was previously created and deleted; try a new run name\",\"path\":[\"upsertBucket\"]}],\"data\":{\"upsertBucket\":null}}"}
+{"time":"2025-04-19T00:29:48.429593401+05:30","level":"ERROR","msg":"HTTP error","status":404,"method":"POST","url":"https://api.wandb.ai/graphql"}
+{"time":"2025-04-19T00:29:48.429669623+05:30","level":"ERROR","msg":"runfiles: CreateRunFiles returned error: returned error 404: {\"data\":{\"createRunFiles\":null},\"errors\":[{\"message\":\"run dl-assignment2/lr9zj76t not found during createRunFiles\",\"path\":[\"createRunFiles\"]}]}"}
+{"time":"2025-04-19T00:29:48.856365304+05:30","level":"INFO","msg":"stream: closing","id":"lr9zj76t"}

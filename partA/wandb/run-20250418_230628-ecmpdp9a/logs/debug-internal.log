@@ -1,0 +1,16 @@
+{"time":"2025-04-18T23:06:28.04585318+05:30","level":"INFO","msg":"stream: starting","core version":"0.19.9","symlink path":"/home/user/Documents/DL/Assignment2/partA/wandb/run-20250418_230628-ecmpdp9a/logs/debug-core.log"}
+{"time":"2025-04-18T23:06:28.41564028+05:30","level":"INFO","msg":"created new stream","id":"ecmpdp9a"}
+{"time":"2025-04-18T23:06:28.415658329+05:30","level":"INFO","msg":"stream: started","id":"ecmpdp9a"}
+{"time":"2025-04-18T23:06:28.415720105+05:30","level":"INFO","msg":"writer: Do: started","stream_id":"ecmpdp9a"}
+{"time":"2025-04-18T23:06:28.415800444+05:30","level":"INFO","msg":"handler: started","stream_id":"ecmpdp9a"}
+{"time":"2025-04-18T23:06:28.41582533+05:30","level":"INFO","msg":"sender: started","stream_id":"ecmpdp9a"}
+{"time":"2025-04-18T23:06:28.695245613+05:30","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-04-18T23:09:32.395608814+05:30","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-04-18T23:09:32.395634118+05:30","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-04-18T23:09:33.396839153+05:30","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading output.log","runtime_seconds":0.403128077,"progress":"2.6KB/2.6KB"},{"desc":"uploading config.yaml","runtime_seconds":0.123034511,"progress":"879B/879B"}],"total_operations":2}}
+{"time":"2025-04-18T23:09:33.617561961+05:30","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-04-18T23:09:33.95010333+05:30","level":"INFO","msg":"stream: closing","id":"ecmpdp9a"}
+{"time":"2025-04-18T23:09:33.950121245+05:30","level":"INFO","msg":"handler: closed","stream_id":"ecmpdp9a"}
+{"time":"2025-04-18T23:09:33.950124168+05:30","level":"INFO","msg":"writer: Close: closed","stream_id":"ecmpdp9a"}
+{"time":"2025-04-18T23:09:33.950145433+05:30","level":"INFO","msg":"sender: closed","stream_id":"ecmpdp9a"}
+{"time":"2025-04-18T23:09:33.950147537+05:30","level":"INFO","msg":"stream: closed","id":"ecmpdp9a"}

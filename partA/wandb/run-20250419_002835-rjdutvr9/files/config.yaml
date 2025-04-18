@@ -1,0 +1,45 @@
+_wandb:
+    value:
+        cli_version: 0.19.9
+        m: []
+        python_version: 3.12.9
+        t:
+            "1":
+                - 1
+                - 41
+                - 55
+            "2":
+                - 1
+                - 41
+                - 55
+            "3":
+                - 2
+                - 14
+                - 23
+                - 55
+            "4": 3.12.9
+            "5": 0.19.9
+            "8":
+                - 5
+            "12": 0.19.9
+            "13": linux-x86_64
+activation_function:
+    value: selu
+batch_normalization:
+    value: true
+batch_size:
+    value: 64
+data_aug:
+    value: false
+dropout:
+    value: 0.2
+filter_organisation:
+    value: half
+hidden_neurons:
+    value: 1024
+learning_rate:
+    value: 0.0002
+num_filters:
+    value: 128
+weight_decay:
+    value: 0

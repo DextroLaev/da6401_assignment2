@@ -1,0 +1,9 @@
+{"time":"2025-04-18T22:23:06.128243864+05:30","level":"INFO","msg":"stream: starting","core version":"0.19.9","symlink path":"/home/user/Documents/DL/Assignment2/partA/wandb/run-20250418_222306-m8zju0np/logs/debug-core.log"}
+{"time":"2025-04-18T22:23:06.495343851+05:30","level":"INFO","msg":"created new stream","id":"m8zju0np"}
+{"time":"2025-04-18T22:23:06.495364604+05:30","level":"INFO","msg":"stream: started","id":"m8zju0np"}
+{"time":"2025-04-18T22:23:06.495382856+05:30","level":"INFO","msg":"writer: Do: started","stream_id":"m8zju0np"}
+{"time":"2025-04-18T22:23:06.495449493+05:30","level":"INFO","msg":"handler: started","stream_id":"m8zju0np"}
+{"time":"2025-04-18T22:23:06.495456775+05:30","level":"INFO","msg":"sender: started","stream_id":"m8zju0np"}
+{"time":"2025-04-18T22:23:06.995297701+05:30","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-04-18T22:23:30.198666978+05:30","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-04-18T22:23:30.198693291+05:30","level":"INFO","msg":"Stopped system monitor"}

@@ -1,0 +1,16 @@
+{"time":"2025-04-18T23:51:00.939063828+05:30","level":"INFO","msg":"stream: starting","core version":"0.19.9","symlink path":"/home/user/Documents/DL/Assignment2/partA/wandb/run-20250418_235100-uqnfyg1z/logs/debug-core.log"}
+{"time":"2025-04-18T23:51:01.307580373+05:30","level":"INFO","msg":"created new stream","id":"uqnfyg1z"}
+{"time":"2025-04-18T23:51:01.307596611+05:30","level":"INFO","msg":"stream: started","id":"uqnfyg1z"}
+{"time":"2025-04-18T23:51:01.307680535+05:30","level":"INFO","msg":"writer: Do: started","stream_id":"uqnfyg1z"}
+{"time":"2025-04-18T23:51:01.307688364+05:30","level":"INFO","msg":"handler: started","stream_id":"uqnfyg1z"}
+{"time":"2025-04-18T23:51:01.307821218+05:30","level":"INFO","msg":"sender: started","stream_id":"uqnfyg1z"}
+{"time":"2025-04-18T23:51:01.665895308+05:30","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-04-18T23:56:45.589591516+05:30","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-04-18T23:56:45.58961212+05:30","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-04-18T23:56:46.590621594+05:30","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading media/images/Test Predictions Grid_0_e54a2ce44b83d6ad21cf.png","runtime_seconds":0.698468677,"progress":"1.1MB/2.5MB"},{"desc":"uploading output.log","runtime_seconds":0.38613126,"progress":"1.9KB/1.9KB"},{"desc":"uploading wandb-summary.json","runtime_seconds":0.386124115,"progress":"347B/347B"},{"desc":"uploading config.yaml","runtime_seconds":0.073539128,"progress":"502B/502B"}],"total_operations":4}}
+{"time":"2025-04-18T23:56:48.41788899+05:30","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-04-18T23:56:48.741836238+05:30","level":"INFO","msg":"stream: closing","id":"uqnfyg1z"}
+{"time":"2025-04-18T23:56:48.741855208+05:30","level":"INFO","msg":"handler: closed","stream_id":"uqnfyg1z"}
+{"time":"2025-04-18T23:56:48.741859021+05:30","level":"INFO","msg":"writer: Close: closed","stream_id":"uqnfyg1z"}
+{"time":"2025-04-18T23:56:48.741890765+05:30","level":"INFO","msg":"sender: closed","stream_id":"uqnfyg1z"}
+{"time":"2025-04-18T23:56:48.741902102+05:30","level":"INFO","msg":"stream: closed","id":"uqnfyg1z"}

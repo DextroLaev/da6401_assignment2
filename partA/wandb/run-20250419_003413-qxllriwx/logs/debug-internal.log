@@ -1,0 +1,16 @@
+{"time":"2025-04-19T00:34:13.156479104+05:30","level":"INFO","msg":"stream: starting","core version":"0.19.9","symlink path":"/home/user/Documents/DL/Assignment2/partA/wandb/run-20250419_003413-qxllriwx/logs/debug-core.log"}
+{"time":"2025-04-19T00:34:13.517101239+05:30","level":"INFO","msg":"created new stream","id":"qxllriwx"}
+{"time":"2025-04-19T00:34:13.517118788+05:30","level":"INFO","msg":"stream: started","id":"qxllriwx"}
+{"time":"2025-04-19T00:34:13.517140785+05:30","level":"INFO","msg":"writer: Do: started","stream_id":"qxllriwx"}
+{"time":"2025-04-19T00:34:13.517206671+05:30","level":"INFO","msg":"handler: started","stream_id":"qxllriwx"}
+{"time":"2025-04-19T00:34:13.517202866+05:30","level":"INFO","msg":"sender: started","stream_id":"qxllriwx"}
+{"time":"2025-04-19T00:34:13.955323187+05:30","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-04-19T00:37:37.468385173+05:30","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-04-19T00:37:37.468410715+05:30","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-04-19T00:37:38.469268964+05:30","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading output.log","runtime_seconds":0.386542199,"progress":"2.2KB/2.2KB"},{"desc":"uploading wandb-summary.json","runtime_seconds":0.386537718,"progress":"217B/217B"},{"desc":"uploading config.yaml","runtime_seconds":0.104025744,"progress":"875B/875B"}],"total_operations":3}}
+{"time":"2025-04-19T00:37:39.380749262+05:30","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-04-19T00:37:39.679255168+05:30","level":"INFO","msg":"stream: closing","id":"qxllriwx"}
+{"time":"2025-04-19T00:37:39.679263657+05:30","level":"INFO","msg":"handler: closed","stream_id":"qxllriwx"}
+{"time":"2025-04-19T00:37:39.679270175+05:30","level":"INFO","msg":"sender: closed","stream_id":"qxllriwx"}
+{"time":"2025-04-19T00:37:39.67926689+05:30","level":"INFO","msg":"writer: Close: closed","stream_id":"qxllriwx"}
+{"time":"2025-04-19T00:37:39.679297775+05:30","level":"INFO","msg":"stream: closed","id":"qxllriwx"}

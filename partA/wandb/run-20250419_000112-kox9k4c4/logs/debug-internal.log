@@ -1,0 +1,16 @@
+{"time":"2025-04-19T00:01:12.60440008+05:30","level":"INFO","msg":"stream: starting","core version":"0.19.9","symlink path":"/home/user/Documents/DL/Assignment2/partA/wandb/run-20250419_000112-kox9k4c4/logs/debug-core.log"}
+{"time":"2025-04-19T00:01:12.970581805+05:30","level":"INFO","msg":"created new stream","id":"kox9k4c4"}
+{"time":"2025-04-19T00:01:12.970597605+05:30","level":"INFO","msg":"stream: started","id":"kox9k4c4"}
+{"time":"2025-04-19T00:01:12.970610252+05:30","level":"INFO","msg":"writer: Do: started","stream_id":"kox9k4c4"}
+{"time":"2025-04-19T00:01:12.970713131+05:30","level":"INFO","msg":"handler: started","stream_id":"kox9k4c4"}
+{"time":"2025-04-19T00:01:12.970708033+05:30","level":"INFO","msg":"sender: started","stream_id":"kox9k4c4"}
+{"time":"2025-04-19T00:01:13.304106671+05:30","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-04-19T00:01:58.637162301+05:30","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-04-19T00:01:58.63718745+05:30","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-04-19T00:01:59.638358275+05:30","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading artifact run-kox9k4c4-TestPredictionsTable10x3Grid","runtime_seconds":1.5400471470000001,"subtasks":[{"desc":"media/images/c5dbf37fa29aee4a25fc.png","runtime_seconds":0.293482912,"progress":"120.9KB/120.9KB"},{"desc":"media/images/02e69349669a46c3f6c2.png","runtime_seconds":0.293479744,"progress":"82.2KB/82.2KB"},{"desc":"media/images/4c5a81551dadd3e7553e.png","runtime_seconds":0.293433289,"progress":"114.3KB/114.3KB"},{"desc":"media/images/a40536cfa13f23bdf038.png","runtime_seconds":0.293429475,"progress":"113.2KB/113.2KB"},{"desc":"media/images/f8ff92738bc1b36a2288.png","runtime_seconds":0.293373239,"progress":"110.9KB/110.9KB"},{"desc":"media/images/36a018347377ea8de29c.png","runtime_seconds":0.29336793,"progress":"76.2KB/76.2KB"},{"desc":"media/images/b362ce8256044a9f2bf4.png","runtime_seconds":0.248594094,"progress":"143.9KB/143.9KB"},{"desc":"media/images/cbefbddaac5bea7eba67.png","runtime_seconds":0.248590112,"progress":"130.1KB/130.1KB"},{"desc":"media/images/64d491664e798c6238a6.png","runtime_seconds":0.248522973,"progress":"80.0KB/124.6KB"},{"desc":"media/images/65042107973a07f75078.png","runtime_seconds":0.248516996,"progress":"96.0KB/116.1KB"}]},{"desc":"uploading wandb-summary.json","runtime_seconds":0.416822375,"progress":"825B/825B"},{"desc":"uploading config.yaml","runtime_seconds":0.118046427,"progress":"502B/502B"}],"total_operations":3}}
+{"time":"2025-04-19T00:02:03.013274387+05:30","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-04-19T00:02:03.318551741+05:30","level":"INFO","msg":"stream: closing","id":"kox9k4c4"}
+{"time":"2025-04-19T00:02:03.318569749+05:30","level":"INFO","msg":"handler: closed","stream_id":"kox9k4c4"}
+{"time":"2025-04-19T00:02:03.318573149+05:30","level":"INFO","msg":"writer: Close: closed","stream_id":"kox9k4c4"}
+{"time":"2025-04-19T00:02:03.318583075+05:30","level":"INFO","msg":"sender: closed","stream_id":"kox9k4c4"}
+{"time":"2025-04-19T00:02:03.318602353+05:30","level":"INFO","msg":"stream: closed","id":"kox9k4c4"}

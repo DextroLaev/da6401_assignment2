@@ -1,0 +1,14 @@
+{"time":"2025-04-19T00:31:04.219551852+05:30","level":"INFO","msg":"stream: starting","core version":"0.19.9","symlink path":"/home/user/Documents/DL/Assignment2/partA/wandb/run-20250419_003104-3duiasvn/logs/debug-core.log"}
+{"time":"2025-04-19T00:31:04.591911058+05:30","level":"INFO","msg":"created new stream","id":"3duiasvn"}
+{"time":"2025-04-19T00:31:04.591936765+05:30","level":"INFO","msg":"stream: started","id":"3duiasvn"}
+{"time":"2025-04-19T00:31:04.591979477+05:30","level":"INFO","msg":"writer: Do: started","stream_id":"3duiasvn"}
+{"time":"2025-04-19T00:31:04.592021156+05:30","level":"INFO","msg":"handler: started","stream_id":"3duiasvn"}
+{"time":"2025-04-19T00:31:04.592099235+05:30","level":"INFO","msg":"sender: started","stream_id":"3duiasvn"}
+{"time":"2025-04-19T00:31:04.868037954+05:30","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-04-19T00:31:20.776747888+05:30","level":"ERROR","msg":"HTTP error","status":404,"method":"POST","url":"https://api.wandb.ai/files/cs24s031-indian-institute-of-technology-madras/dl-assignment2/3duiasvn/file_stream"}
+{"time":"2025-04-19T00:31:20.776776608+05:30","level":"ERROR+4","msg":"filestream: fatal error: filestream: failed to upload: 404 Not Found path=files/cs24s031-indian-institute-of-technology-madras/dl-assignment2/3duiasvn/file_stream: {\"error\":\"run dl-assignment2/3duiasvn not found while streaming file\"}"}
+{"time":"2025-04-19T00:31:32.047464286+05:30","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-04-19T00:31:32.047506022+05:30","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-04-19T00:31:32.308805387+05:30","level":"INFO","msg":"api: retrying HTTP error","status":409,"url":"https://api.wandb.ai/graphql","body":"{\"errors\":[{\"message\":\"run 3duiasvn was previously created and deleted; try a new run name\",\"path\":[\"upsertBucket\"]}],\"data\":{\"upsertBucket\":null}}"}
+{"time":"2025-04-19T00:31:32.362096017+05:30","level":"ERROR","msg":"HTTP error","status":404,"method":"POST","url":"https://api.wandb.ai/graphql"}
+{"time":"2025-04-19T00:31:32.362156326+05:30","level":"ERROR","msg":"runfiles: CreateRunFiles returned error: returned error 404: {\"data\":{\"createRunFiles\":null},\"errors\":[{\"message\":\"run dl-assignment2/3duiasvn not found during createRunFiles\",\"path\":[\"createRunFiles\"]}]}"}

@@ -1,0 +1,16 @@
+{"time":"2025-04-19T00:04:48.678612966+05:30","level":"INFO","msg":"stream: starting","core version":"0.19.9","symlink path":"/home/user/Documents/DL/Assignment2/partA/wandb/run-20250419_000448-3nxr2ujo/logs/debug-core.log"}
+{"time":"2025-04-19T00:04:49.044717893+05:30","level":"INFO","msg":"created new stream","id":"3nxr2ujo"}
+{"time":"2025-04-19T00:04:49.044734489+05:30","level":"INFO","msg":"stream: started","id":"3nxr2ujo"}
+{"time":"2025-04-19T00:04:49.044744893+05:30","level":"INFO","msg":"writer: Do: started","stream_id":"3nxr2ujo"}
+{"time":"2025-04-19T00:04:49.044804704+05:30","level":"INFO","msg":"sender: started","stream_id":"3nxr2ujo"}
+{"time":"2025-04-19T00:04:49.044817073+05:30","level":"INFO","msg":"handler: started","stream_id":"3nxr2ujo"}
+{"time":"2025-04-19T00:04:49.38125024+05:30","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-04-19T00:05:33.077547874+05:30","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-04-19T00:05:33.077576269+05:30","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-04-19T00:05:34.079224461+05:30","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading artifact run-3nxr2ujo-TestPredictionsTableHigh-Res10x3Grid","runtime_seconds":1.5234241480000001,"subtasks":[{"desc":"media/images/9fdeb845ce344f593aa2.png","runtime_seconds":0.419025695,"progress":"124.1KB/124.1KB"},{"desc":"media/images/6949e9f18af4373b74b4.png","runtime_seconds":0.419019152,"progress":"130.4KB/130.4KB"},{"desc":"media/images/c87d6fef277ba5cc2701.png","runtime_seconds":0.418926809,"progress":"143.6KB/143.6KB"},{"desc":"media/images/6ccaf841f45a73b39ae5.png","runtime_seconds":0.418922054,"progress":"140.8KB/140.8KB"},{"desc":"media/images/41c4c2ff2354415561a1.png","runtime_seconds":0.418876046,"progress":"194.4KB/194.4KB"},{"desc":"media/images/8992f5e22bfe063db872.png","runtime_seconds":0.418867162,"progress":"152.9KB/152.9KB"},{"desc":"media/images/7df8e64df47f46d352ca.png","runtime_seconds":0.361789644,"progress":"96.0KB/203.3KB"},{"desc":"media/images/61fc2819dce39e898964.png","runtime_seconds":0.361785711,"progress":"128.0KB/155.2KB"},{"desc":"media/images/5e054b4c73fb3a2795bd.png","runtime_seconds":0.36173549,"progress":"80.0KB/202.4KB"},{"desc":"media/images/a5f2ced3573539c4a5c4.png","runtime_seconds":0.361731251,"progress":"16.0KB/192.0KB"}]},{"desc":"uploading output.log","runtime_seconds":0.426292115,"progress":"439B/439B"},{"desc":"uploading config.yaml","runtime_seconds":0.141623926,"progress":"502B/502B"}],"total_operations":3}}
+{"time":"2025-04-19T00:05:37.485990429+05:30","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-04-19T00:05:37.778474008+05:30","level":"INFO","msg":"stream: closing","id":"3nxr2ujo"}
+{"time":"2025-04-19T00:05:37.778479152+05:30","level":"INFO","msg":"handler: closed","stream_id":"3nxr2ujo"}
+{"time":"2025-04-19T00:05:37.778482485+05:30","level":"INFO","msg":"writer: Close: closed","stream_id":"3nxr2ujo"}
+{"time":"2025-04-19T00:05:37.778503696+05:30","level":"INFO","msg":"sender: closed","stream_id":"3nxr2ujo"}
+{"time":"2025-04-19T00:05:37.778515697+05:30","level":"INFO","msg":"stream: closed","id":"3nxr2ujo"}

@@ -1,0 +1,16 @@
+{"time":"2025-04-18T22:40:44.467299208+05:30","level":"INFO","msg":"stream: starting","core version":"0.19.9","symlink path":"/home/user/Documents/DL/Assignment2/partA/wandb/run-20250418_224044-cbos817d/logs/debug-core.log"}
+{"time":"2025-04-18T22:40:44.855441444+05:30","level":"INFO","msg":"created new stream","id":"cbos817d"}
+{"time":"2025-04-18T22:40:44.855458042+05:30","level":"INFO","msg":"stream: started","id":"cbos817d"}
+{"time":"2025-04-18T22:40:44.855491942+05:30","level":"INFO","msg":"writer: Do: started","stream_id":"cbos817d"}
+{"time":"2025-04-18T22:40:44.855525929+05:30","level":"INFO","msg":"handler: started","stream_id":"cbos817d"}
+{"time":"2025-04-18T22:40:44.855542453+05:30","level":"INFO","msg":"sender: started","stream_id":"cbos817d"}
+{"time":"2025-04-18T22:40:45.158870364+05:30","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-04-18T22:44:47.206602195+05:30","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-04-18T22:44:47.206635561+05:30","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-04-18T22:44:48.207285624+05:30","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"updating run config","runtime_seconds":0.213876593}],"total_operations":1}}
+{"time":"2025-04-18T22:44:49.681107116+05:30","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-04-18T22:44:50.017949123+05:30","level":"INFO","msg":"stream: closing","id":"cbos817d"}
+{"time":"2025-04-18T22:44:50.017954814+05:30","level":"INFO","msg":"handler: closed","stream_id":"cbos817d"}
+{"time":"2025-04-18T22:44:50.017957608+05:30","level":"INFO","msg":"writer: Close: closed","stream_id":"cbos817d"}
+{"time":"2025-04-18T22:44:50.017960161+05:30","level":"INFO","msg":"sender: closed","stream_id":"cbos817d"}
+{"time":"2025-04-18T22:44:50.017981013+05:30","level":"INFO","msg":"stream: closed","id":"cbos817d"}

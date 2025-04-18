@@ -1,0 +1,22 @@
+wandb_version: 1
+
+activation_function:
+  value: selu
+batch_normalization:
+  value: true
+batch_size:
+  value: 64
+data_aug:
+  value: false
+dropout:
+  value: 0.2
+filter_organisation:
+  value: half
+hidden_neurons:
+  value: 1024
+learning_rate:
+  value: 0.0002
+num_filters:
+  value: 128
+weight_decay:
+  value: 0

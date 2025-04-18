@@ -1,0 +1,28 @@
+Loading Data ....
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 9999/9999 [00:43<00:00, 230.35it/s]
+Starting training with run name: filter_half_bs_64_ac_gelu
+Epoch [1/25], Train Loss: 2.3029, Train Acc: 10.03%, Val Loss: 2.3028, Val Acc: 10.00%
+Epoch [2/25], Train Loss: 2.3030, Train Acc: 9.94%, Val Loss: 2.3028, Val Acc: 10.00%
+Epoch [3/25], Train Loss: 2.3029, Train Acc: 10.03%, Val Loss: 2.3028, Val Acc: 10.00%
+Epoch [4/25], Train Loss: 2.3027, Train Acc: 10.06%, Val Loss: 2.3026, Val Acc: 10.00%
+Epoch [5/25], Train Loss: 2.3027, Train Acc: 10.06%, Val Loss: 2.3025, Val Acc: 10.00%
+Epoch [6/25], Train Loss: 2.3024, Train Acc: 10.11%, Val Loss: 2.3025, Val Acc: 10.00%
+Epoch [7/25], Train Loss: 2.3021, Train Acc: 11.14%, Val Loss: 2.3017, Val Acc: 11.65%
+Epoch [8/25], Train Loss: 2.3007, Train Acc: 12.55%, Val Loss: 2.2986, Val Acc: 14.20%
+Epoch [9/25], Train Loss: 2.2937, Train Acc: 13.75%, Val Loss: 2.2865, Val Acc: 14.90%
+Epoch [10/25], Train Loss: 2.2739, Train Acc: 14.55%, Val Loss: 2.2622, Val Acc: 14.70%
+Epoch [11/25], Train Loss: 2.2536, Train Acc: 14.60%, Val Loss: 2.2537, Val Acc: 15.30%
+Epoch [12/25], Train Loss: 2.2433, Train Acc: 15.53%, Val Loss: 2.2440, Val Acc: 15.45%
+Epoch [13/25], Train Loss: 2.2376, Train Acc: 15.95%, Val Loss: 2.2401, Val Acc: 16.45%
+Epoch [14/25], Train Loss: 2.2327, Train Acc: 17.04%, Val Loss: 2.2401, Val Acc: 16.70%
+Epoch [15/25], Train Loss: 2.2286, Train Acc: 17.06%, Val Loss: 2.2355, Val Acc: 16.40%
+Epoch [16/25], Train Loss: 2.2266, Train Acc: 17.53%, Val Loss: 2.2300, Val Acc: 17.00%
+Epoch [17/25], Train Loss: 2.2231, Train Acc: 18.36%, Val Loss: 2.2289, Val Acc: 17.15%
+Epoch [18/25], Train Loss: 2.2203, Train Acc: 18.36%, Val Loss: 2.2321, Val Acc: 17.65%
+Epoch [19/25], Train Loss: 2.2169, Train Acc: 18.49%, Val Loss: 2.2255, Val Acc: 17.85%
+Epoch [20/25], Train Loss: 2.2147, Train Acc: 18.95%, Val Loss: 2.2207, Val Acc: 18.15%
+Epoch [21/25], Train Loss: 2.2127, Train Acc: 18.59%, Val Loss: 2.2186, Val Acc: 18.20%
+Epoch [22/25], Train Loss: 2.2091, Train Acc: 19.29%, Val Loss: 2.2184, Val Acc: 18.35%
+Epoch [23/25], Train Loss: 2.2079, Train Acc: 18.90%, Val Loss: 2.2150, Val Acc: 18.45%
+Epoch [24/25], Train Loss: 2.2050, Train Acc: 19.34%, Val Loss: 2.2146, Val Acc: 18.35%
+Epoch [25/25], Train Loss: 2.2032, Train Acc: 19.34%, Val Loss: 2.2204, Val Acc: 18.65%

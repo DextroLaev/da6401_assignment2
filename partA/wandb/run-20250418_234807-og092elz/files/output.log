@@ -1,0 +1,21 @@
+Traceback (most recent call last):
+  File "/home/user/Documents/DL/Assignment2/partA/test.py", line 76, in <module>
+    evaluate_and_visualize(model_path='./models/best_model.pth')
+  File "/home/user/Documents/DL/Assignment2/partA/test.py", line 12, in evaluate_and_visualize
+    train_data, val_data, test_loader = load_dataset('./inaturalist_12K/', batch_size=32, data_aug=False)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/Documents/DL/Assignment2/partA/dataset.py", line 55, in load_dataset
+    train_dataset_full = datasets.ImageFolder(train_folder, transform=data_transform)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/Documents/DL/DL_ENV/lib/python3.12/site-packages/torchvision/datasets/folder.py", line 328, in __init__
+    super().__init__(
+  File "/home/user/Documents/DL/DL_ENV/lib/python3.12/site-packages/torchvision/datasets/folder.py", line 149, in __init__
+    classes, class_to_idx = self.find_classes(self.root)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/Documents/DL/DL_ENV/lib/python3.12/site-packages/torchvision/datasets/folder.py", line 234, in find_classes
+    return find_classes(directory)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/Documents/DL/DL_ENV/lib/python3.12/site-packages/torchvision/datasets/folder.py", line 41, in find_classes
+    classes = sorted(entry.name for entry in os.scandir(directory) if entry.is_dir())
+                                             ^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: './inaturalist_12K//train/'

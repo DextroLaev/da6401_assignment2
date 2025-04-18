@@ -1,0 +1,11 @@
+{"time":"2025-04-19T00:29:59.381569042+05:30","level":"INFO","msg":"stream: starting","core version":"0.19.9","symlink path":"/home/user/Documents/DL/Assignment2/partA/wandb/run-20250419_002959-z69lxmq6/logs/debug-core.log"}
+{"time":"2025-04-19T00:29:59.748252625+05:30","level":"INFO","msg":"created new stream","id":"z69lxmq6"}
+{"time":"2025-04-19T00:29:59.748271795+05:30","level":"INFO","msg":"stream: started","id":"z69lxmq6"}
+{"time":"2025-04-19T00:29:59.748321161+05:30","level":"INFO","msg":"writer: Do: started","stream_id":"z69lxmq6"}
+{"time":"2025-04-19T00:29:59.748356207+05:30","level":"INFO","msg":"sender: started","stream_id":"z69lxmq6"}
+{"time":"2025-04-19T00:29:59.748386468+05:30","level":"INFO","msg":"handler: started","stream_id":"z69lxmq6"}
+{"time":"2025-04-19T00:30:00.04078776+05:30","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-04-19T00:30:46.780186092+05:30","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-04-19T00:30:46.780239048+05:30","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-04-19T00:30:47.781173572+05:30","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading config.yaml","runtime_seconds":0.397363715,"progress":"872B/872B"}],"total_operations":1}}
+{"time":"2025-04-19T00:30:47.937937923+05:30","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}

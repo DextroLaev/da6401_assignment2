@@ -1,0 +1,17 @@
+{"time":"2025-04-18T23:23:45.773985822+05:30","level":"INFO","msg":"stream: starting","core version":"0.19.9","symlink path":"/home/user/Documents/DL/Assignment2/partA/wandb/run-20250418_232345-um51kwxq/logs/debug-core.log"}
+{"time":"2025-04-18T23:23:46.138447658+05:30","level":"INFO","msg":"created new stream","id":"um51kwxq"}
+{"time":"2025-04-18T23:23:46.138465147+05:30","level":"INFO","msg":"stream: started","id":"um51kwxq"}
+{"time":"2025-04-18T23:23:46.138561936+05:30","level":"INFO","msg":"writer: Do: started","stream_id":"um51kwxq"}
+{"time":"2025-04-18T23:23:46.138634093+05:30","level":"INFO","msg":"handler: started","stream_id":"um51kwxq"}
+{"time":"2025-04-18T23:23:46.13866369+05:30","level":"INFO","msg":"sender: started","stream_id":"um51kwxq"}
+{"time":"2025-04-18T23:23:46.420887529+05:30","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-04-18T23:26:19.561882686+05:30","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-04-18T23:26:19.561906894+05:30","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-04-18T23:26:20.563150727+05:30","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading config.yaml","runtime_seconds":0.12552902,"progress":"873B/873B"}],"total_operations":1}}
+{"time":"2025-04-18T23:26:49.896144917+05:30","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": context deadline exceeded"}
+{"time":"2025-04-18T23:26:52.872269338+05:30","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-04-18T23:26:53.25011025+05:30","level":"INFO","msg":"stream: closing","id":"um51kwxq"}
+{"time":"2025-04-18T23:26:53.250116904+05:30","level":"INFO","msg":"handler: closed","stream_id":"um51kwxq"}
+{"time":"2025-04-18T23:26:53.250120087+05:30","level":"INFO","msg":"writer: Close: closed","stream_id":"um51kwxq"}
+{"time":"2025-04-18T23:26:53.250130215+05:30","level":"INFO","msg":"sender: closed","stream_id":"um51kwxq"}
+{"time":"2025-04-18T23:26:53.250147745+05:30","level":"INFO","msg":"stream: closed","id":"um51kwxq"}
