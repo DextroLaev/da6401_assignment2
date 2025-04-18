@@ -1,4 +1,5 @@
 from torchvision import transforms,datasets
+from tqdm import tqdm
 
 def load_dataset(path,input_shape = (256,256),data_aug='no'):
     '''
@@ -37,7 +38,7 @@ def load_dataset(path,input_shape = (256,256),data_aug='no'):
     class_data = {c:[] for c in classes}
 
     print('Loading Data ....')
-    for data, label in train_dataset_full:
+    for data, label in tqdm(train_dataset_full):
         class_data[classes[label]].append((data,label))
 
     train_data = []

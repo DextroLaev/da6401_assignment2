@@ -136,6 +136,8 @@ class Classifier_Model(nn.Module):
                 acc += pred.eq(label.view_as(pred)).sum().item()
                 total_train += label.size(0)
 
+            del img, label, output, loss, pred
+            torch.cuda.empty_cache()
             train_loss_avg = total_loss_train / len(train_data)
             train_acc = 100. * acc / total_train
             self.eval()
