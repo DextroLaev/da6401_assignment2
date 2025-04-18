@@ -105,8 +105,8 @@ class Classifier_Model(nn.Module):
     def train_network(self, train_data, val_data, test_data, batch_size=32, lr=1e-5, weight_decay=0.0, epochs=1000,
                   model_save_path='./models/model.pth', early_stopping_patience=10,log=False):        
         
-        train_data = DataLoader(train_data, batch_size=batch_size, shuffle=True)
-        val_data = DataLoader(val_data, batch_size=batch_size, shuffle=True)
+        train_data = DataLoader(train_data, batch_size=batch_size, shuffle=True,num_workers=0,pin_memory=True)
+        val_data = DataLoader(val_data, batch_size=batch_size, shuffle=True,num_workers=0,pin_memory=True)
 
         loss_func = torch.nn.CrossEntropyLoss()        
         optimizer = torch.optim.Adam(self.parameters(), lr=lr, weight_decay=weight_decay)    
@@ -157,6 +157,8 @@ class Classifier_Model(nn.Module):
                 val_loss_avg = total_loss_val / len(val_data)
                 val_acc = 100. * correct_val / len(val_data.dataset)
 
+            del data,label,out,pred,total_loss_val
+            torch.cuda.empty_cache()
             print(f'Epoch [{ep+1}/{epochs}], Train Loss: {train_loss_avg:.4f}, Train Acc: {train_acc:.2f}%, Val Loss: {val_loss_avg:.4f}, Val Acc: {val_acc:.2f}%')
             
             # Log to wandb

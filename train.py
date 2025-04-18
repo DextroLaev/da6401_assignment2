@@ -3,6 +3,9 @@ from model import Classifier_Model
 import matplotlib.pyplot as plt
 from config import *
 import wandb
+import os
+import torch
+
 
 def train():
     wandb.login()
@@ -38,10 +41,16 @@ def train():
                         test_data=test_data,
                         lr=learning_rate,
                         weight_decay=weight_decay,
-                        epochs=15,batch_size=batch_size,log=True)
+                        epochs=20,batch_size=batch_size,log=True)
+    del model
+    del train_data
+    del val_data
+    del test_data
+    torch.cuda.empty_cache()
 
 
 if __name__ == '__main__':
+    os.environ['PYTORCH_CUDA_ALLOC_CONF'] = "expandable_segments:True"
     sweep_config = {
 		'name': 'inaturalist12K-exp(bayes-select)',
 		'method': 'bayes',
@@ -49,7 +58,7 @@ if __name__ == '__main__':
 		'parameters': {
 		    'hidden_neurons':{'values':[1024,2048,4192]},		    
 		    'activation_function': {'values': ['sigmoid', 'tanh', 'relu','silu','selu','mish','leaky_relu']},
-		    'batch_size': {'values': [8,16,32]},
+		    'batch_size': {'values': [16,32,64]},
 		    'learning_rate': {'values': [1e-4,1e-5,2e-5]},		    		    
 		    'weight_decay': {'values': [0, 0.0005,0.00005]},
             'data_aug':{'values':['yes','no']},
