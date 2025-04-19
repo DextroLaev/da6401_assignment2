@@ -1,3 +1,18 @@
 import torch
 
 DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+OUT_CLASSES = 10
+DENSE_NEURONS = 4192
+ACTIVATION = 'selu'
+FILTER_ORGANISATION = 'double'
+BATCH_NORMALIZATION = True,
+NUM_FILTERS = 64
+DROPOUT = 0.3
+DATA_AUG = False
+BATCH_SIZE = 64
+LEARNING_RATE = 0.0001
+WEIGHT_DECAY = 0.00005
+EPOCHS = 25
+LOG_WANDB = False
+SAVE_MODEL = True
+EARLY_STOPPING_PATIENCE = 10
