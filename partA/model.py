@@ -1,3 +1,26 @@
+"""
+Classifier_Model: A Flexible Convolutional Neural Network (CNN) for Image Classification
+
+This module defines the `Classifier_Model` class, which provides a configurable CNN architecture suitable
+for image classification tasks. It supports dynamic filter scaling, multiple activation functions,
+optional batch normalization, dropout, and a built-in training loop with early stopping and Weights & Biases (wandb) logging.
+
+Classes
+-------
+Classifier_Model(nn.Module)
+    Custom CNN architecture supporting various configurations and a training utility.
+
+Example Usage
+-------------
+>>> model = Classifier_Model(out_classes=100, num_filters=32, activation='relu', filter_organisation='double')
+>>> model.train_network(train_loader, val_loader, epochs=25, log_wandb=True, save_model=True)
+
+Notes
+-----
+- The model assumes 3-channel RGB input.
+- The input image dimensions should be divisible by 32 (due to 5 max-pooling layers).
+"""
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -10,16 +33,14 @@ class Classifier_Model(nn.Module):
     """
     A flexible convolutional neural network (CNN) classifier model for image classification tasks.
     Parameters:
-        out_classes (int): Number of output classes.
-        
-        num_filter (int): Number of filters used with filter_organisation.
-        n_dense_output_neuron (int): Number of neurons in the dense (fully connected) layer.
-        activation (str): Activation function to use ('relu', 'tanh', 'gelu', etc.).
-        filter_organisation (str): Filter scaling strategy ('same', 'double', or 'half').
-        batch_normalization (bool): Whether to use batch normalization after convolutions.
-        dropout (float): Dropout rate applied after the dense layer.
-        input_shape (tuple): Shape of the input image (height, width).
-        output_shape (int): Number of classes (same as out_classes).
+        out_classes (int):              Number of output classes.
+        num_filter (int):               Number of filters used with filter_organisation.
+        n_dense_output_neuron (int):    Number of neurons in the dense (fully connected) layer.
+        activation (str):               Activation function to use ('relu', 'tanh', 'gelu', etc.).
+        filter_organisation (str):      Filter scaling strategy ('same', 'double', or 'half').
+        batch_normalization (bool):     Whether to use batch normalization after convolutions.
+        dropout (float):                Dropout rate applied after the dense layer.
+        input_shape (tuple):            Shape of the input image (height, width).      
     """
 
     def __init__(self,out_classes=10,
@@ -29,8 +50,7 @@ class Classifier_Model(nn.Module):
                 filter_organisation='same',
                 batch_normalization=True,
                 dropout=0.5,
-                input_shape=(256,256),
-                output_shape=10
+                input_shape=(256,256)
                 ):
         super(Classifier_Model,self).__init__()
 
@@ -101,11 +121,11 @@ class Classifier_Model(nn.Module):
         Applies a convolutional pass to the input tensor, including optional batch normalization,
         activation, and max pooling.
         Args:
-            x (torch.Tensor): Input tensor.
-            conv_layer (nn.Conv2d): Convolutional layer to apply.
-            batch_norm (nn.BatchNorm2d): Batch normalization layer to apply (if enabled).
+            x (torch.Tensor):              Input tensor.
+            conv_layer (nn.Conv2d):        Convolutional layer to apply.
+            batch_norm (nn.BatchNorm2d):   Batch normalization layer to apply (if enabled).
         Returns:
-            torch.Tensor: Transformed tensor after conv -> BN -> activation -> pooling.
+            torch.Tensor:                  Transformed tensor after conv -> BN -> activation -> pooling.
         """
 
         x = conv_layer(x)
@@ -170,7 +190,7 @@ class Classifier_Model(nn.Module):
 
     # Training loop with validation and optional wandb logging
     def train_network(self, train_data, val_data,lr=1e-5, weight_decay=0.0, epochs=20,
-                  model_save_path='./models/model.pth',log=False):               
+                  model_save_path='./models/model.pth',log_wandb=False,save_model=False,early_stopping_patience=10):               
         """
         Trains the CNN model using provided training and validation datasets.
         Args:
@@ -185,8 +205,7 @@ class Classifier_Model(nn.Module):
         """
         loss_func = torch.nn.CrossEntropyLoss()        
         optimizer = torch.optim.Adam(self.parameters(), lr=lr, weight_decay=weight_decay)    
-
-        scaler = torch.cuda.amp.GradScaler
+        
         best_val_loss = float('inf')
         patience_counter = 0
 
@@ -242,7 +261,7 @@ class Classifier_Model(nn.Module):
             print(f'Epoch [{ep+1}/{epochs}], Train Loss: {train_loss_avg:.4f}, Train Acc: {train_acc:.2f}%, Val Loss: {val_loss_avg:.4f}, Val Acc: {val_acc:.2f}%')
             
             # Log to wandb
-            if log:
+            if log_wandb:
                 wandb.log({
                     "epoch": ep+1,
                     "train_loss": train_loss_avg,
@@ -252,14 +271,15 @@ class Classifier_Model(nn.Module):
                 })
 
             # Early stopping and model saving
-            # if val_loss_avg < best_val_loss:
-            #     best_val_loss = val_loss_avg
-            #     patience_counter = 0
-            #     torch.save(self.state_dict(), model_save_path)
-            #     print("Model saved at epoch {} with val loss {:.4f}".format(ep+1, val_loss_avg))
-            # else:
-            #     patience_counter += 1
-            #     if patience_counter >= early_stopping_patience:
-            #         print("Early stopping triggered at epoch {}".format(ep+1))                    
-            #         break
+            if save_model:
+                if val_loss_avg < best_val_loss:
+                    best_val_loss = val_loss_avg
+                    patience_counter = 0
+                    torch.save(self.state_dict(), model_save_path)
+                    print("Model saved at epoch {} with val loss {:.4f}".format(ep+1, val_loss_avg))
+                else:
+                    patience_counter += 1
+                    if patience_counter >= early_stopping_patience:
+                        print("Early stopping triggered at epoch {}".format(ep+1))                    
+                        break
 
