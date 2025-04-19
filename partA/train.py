@@ -7,42 +7,42 @@ import wandb
 
 def train():
     """
-    Initializes Weights & Biases logging, loads the dataset, defines the model,
-    and starts the training process.
+    Trains a custom CNN model (Classifier_Model) on the iNaturalist 12K dataset.
 
-    The training uses a custom CNN model (Classifier_Model) on the iNaturalist 12K dataset.
-    The dataset is split into training, validation, and test sets. The model is configured
-    with specific hyperparameters such as architecture details, learning rate, dropout, 
-    batch normalization, etc. Training is then performed for a fixed number of epochs.
+    This function performs the following steps:
+        - Logs into Weights & Biases (wandb) and initializes a logging run.
+        - Loads the iNaturalist dataset with training, validation, and test splits using predefined settings.
+        - Initializes the Classifier_Model with architecture and training hyperparameters from config.
+        - Trains the model using the specified optimizer, loss, and learning rate schedule.
+        - Optionally logs metrics to wandb and saves the best-performing model to disk.
+        - Supports early stopping based on validation performance.
 
-    This function also initializes W&B logging but sets `log=False` for training, so metrics
-    will not be uploaded unless changed.
-    Notes
-    -----
-    - The model is trained on GPU if CUDA is available.
-    - Dataset should follow the expected structure with 'train' and 'val' directories.
-    - Weights & Biases must be logged into prior to running.
-    - `config.py` should define the `DEVICE` variable.
+    Configuration:
+        - All training and model hyperparameters are imported from `config.py`.
+        - Logging, dropout, batch normalization, and data augmentation settings are customizable.
 
-    Returns
-    -------
-    None
+    Notes:
+        - The model is trained on GPU if available, otherwise defaults to CPU.
+        - The dataset path must contain 'train' and 'val' subdirectories.
+        - You must be logged into Weights & Biases (wandb) for logging to function properly.
+
+    Returns:
+        None
     """
     wandb.login()
     var1 = wandb.init(project='dl-assignment2')
 
-    train_data,val_data,test_data = load_dataset('./inaturalist_12K/')
+    train_data,val_data,test_data = load_dataset('../inaturalist_12K/',data_aug=DATA_AUG,batch_size=BATCH_SIZE)
     
-    model = Classifier_Model(out_classes=10,n_dense_output_neuron=2048,activation='relu',
-                             filter_organisation='double',num_filters=32,
-                             batch_normalization='yes',dropout=0.5)
+    model = Classifier_Model(out_classes=OUT_CLASSES,n_dense_output_neuron=DENSE_NEURONS,activation=ACTIVATION,
+                             filter_organisation=FILTER_ORGANISATION,num_filters=NUM_FILTERS,
+                             batch_normalization=BATCH_NORMALIZATION,dropout=DROPOUT)
     
     model.train_network(train_data=train_data,
                         val_data=val_data,
-                        test_data=test_data,
-                        lr=1e-5,
-                        weight_decay=0.0,
-                        epochs=20,log=False)
+                        lr=LEARNING_RATE,
+                        weight_decay=WEIGHT_DECAY,
+                        epochs=EPOCHS,log_wandb=LOG_WANDB,save_model=SAVE_MODEL,early_stopping_patience=EARLY_STOPPING_PATIENCE)
 
 
 if __name__ == '__main__':
