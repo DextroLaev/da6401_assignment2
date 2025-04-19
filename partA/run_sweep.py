@@ -1,3 +1,37 @@
+"""
+Hyperparameter Sweep Training Script for CNN on iNaturalist 12K Dataset
+
+This script performs a hyperparameter sweep to train a configurable convolutional neural network (CNN)
+on the iNaturalist 12K dataset using Weights & Biases (wandb). The goal is to optimize model performance
+by tuning various hyperparameters using Bayesian search.
+
+Key Features:
+- Uses wandb for hyperparameter sweep management and experiment tracking.
+- CNN architecture is defined in the `Classifier_Model` class.
+- The model is trained on train and validation splits from iNaturalist 12K.
+- Supports a wide range of hyperparameters including activation functions, dropout, filter organization, and more.
+- Automatically assigns a descriptive run name based on key hyperparameters.
+- Clears GPU memory after each run to prevent memory leaks.
+
+Hyperparameters (sweep_config):
+- hidden_neurons: Number of neurons in the dense (fully connected) layer.
+- activation_function: Activation function to be used in conv/dense layers.
+- batch_size: Training batch size.
+- learning_rate: Learning rate for optimizer (e.g., Adam).
+- weight_decay: Weight decay (L2 regularization).
+- data_aug: Whether to apply data augmentation to training data.
+- batch_normalization: Whether to include BatchNorm layers in the model.
+- num_filters: Number of filters in the first conv layer.
+- dropout: Dropout rate applied after convolution blocks.
+- filter_organisation: How filters evolve across layers ('same', 'double', 'half').
+
+Notes:
+- WandB login is required before running (wandb.login()).
+- Sweep is executed with 100 runs using the Bayesian optimization strategy.
+- Make sure the dataset path ('../inaturalist_12K/') is correct.
+"""
+
+
 from dataset import load_dataset
 from model import Classifier_Model
 from config import *
@@ -7,6 +41,7 @@ import torch
 import gc
 
 def train():
+
     wandb.login()
     var1 = wandb.init(project='dl-assignment2')
 
