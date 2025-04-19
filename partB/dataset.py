@@ -1,3 +1,54 @@
+"""
+    Dataset Loader for iNaturalist 12K (or similar folder-structured datasets)
+
+    This module defines the `load_dataset` function, which loads images from a specified dataset path
+    structured using torchvision's `ImageFolder` format. It supports optional data augmentation and returns
+    PyTorch DataLoaders for training, validation, and testing.
+
+    Functions
+    ---------
+    load_dataset(path, input_shape=(256, 256), data_aug=True, batch_size=32)
+        Loads image data from a folder-structured dataset and returns DataLoaders for train, val, and test sets.
+
+    Details
+    -------
+    Expected folder structure:
+        path/
+        ├── train/
+        │   ├── class1/
+        │   ├── class2/
+        │   └── ...
+        └── val/
+            ├── class1/
+            ├── class2/
+            └── ...
+
+    Parameters
+    ----------
+    path : str
+        Root path of the dataset. Must contain 'train' and 'val' subdirectories with class folders inside.
+    input_shape : tuple of int, optional
+        Size to resize each image to, as (height, width). Default is (256, 256).
+    data_aug : bool, optional
+        Whether to apply data augmentation (random horizontal flip and rotation) to training images. Default is True.
+    batch_size : int, optional
+        Number of samples per batch in the returned DataLoaders. Default is 32.
+
+    Returns
+    -------
+    train_data : torch.utils.data.DataLoader
+        DataLoader for the training portion of the training dataset (80% split per class).
+    val_data : torch.utils.data.DataLoader
+        DataLoader for the validation portion of the training dataset (20% split per class).
+    test_data : torch.utils.data.DataLoader
+        DataLoader for the testing dataset (loaded from 'val' folder).
+
+    Note
+    ----
+    This function manually splits the training data class-wise into training and validation subsets.
+    The `val/` directory is treated as the test set.
+"""
+
 from torchvision import transforms,datasets
 from tqdm import tqdm
 from torch.utils.data import DataLoader
@@ -53,7 +104,7 @@ def load_dataset(path,input_shape = (256,256),data_aug=True,batch_size=32):
     
     train_data = DataLoader(train_data, batch_size=batch_size, shuffle=True)
     val_data = DataLoader(val_data, batch_size=batch_size, shuffle=True)
-    test_data = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
+    test_data = DataLoader(test_dataset, batch_size=batch_size, shuffle=True)
 
     return train_data, val_data, test_data
 
