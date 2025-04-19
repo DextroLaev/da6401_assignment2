@@ -1,4 +1,4 @@
-# 🐦 iNaturalist 12K Image Classifier - Custom CNN with PyTorch
+# 🐦 iNaturalist 12K Image Classifier - Custom CNN with PyTorch and Pre-Trained ResNet50 Model
 
 A configurable convolutional neural network (CNN) model for fine-grained image classification using the iNaturalist 12K dataset. This project includes:
 
@@ -51,37 +51,40 @@ These files contain the essential code for building and running the neural netwo
 
 - **`dataset.py`** 📊  
   - Handles **data loading** and **pre-processing**.  
-  - Currently supports **Fashion-MNIST** and **MNIST** datasets.
+  - Currently supports **iNaturallist_12K**.
 
-- **`activations.py`** ⚡  
-  - Implements various **activation functions** along with their derivatives.
-  - Currently it supports **`sigmoid`**, **`ReLU`**, **`Tanh`**, **`identity`**
-  - New activation functions can be added by **inheriting the `Activation` base class** and modifying the necessary code.
+- **`config.py`** ⚡  
+  - contains the model specific configuration to run the train the respective models.
 
-- **`loss.py`** 📊  
-  - Implements different loss functions.
-  - Currently supports **Mean Squared Error (MSE)** and **Cross-Entropy** loss.
-  - New loss functions can be added by **inheriting the `Loss` base class** and modifying the necessary code.
 
-- **`optimizers.py`** ⚡  
-  - Implements various **optimizers** along with their update rules.  
-  - Currently supports **SGD, Nesterov, Momentum, Adam, and Nadam**.
-  - New optimizers can be added by **inheriting the `Optimizers` class** and modifying the `config` and `update` methods.
+- **`test.py`** 📊  
+  - This code is used evaluate the performance of the model on the testing dataset
 
-- **`neural_net.py`** 🤖  
-  - Implements the **Neural Network architecture**.
-  - Contains the `Neural_Net` class with methods like `feed_forward`, `backpropagation`, etc.
+
+- **`train.py`** ⚡  
+  - Both the folders `pathA` and `pathB` have this file. This file is used to train the model with the default configuration
+  
+
+- **`./partA/model.py`** 🤖  
+  - Implements the **CNN Model**.
+  - Contains the `Classifier` class with methods like `forward`, `train_network`, etc.
+  - The code is modular, allowing easy modifications to the CNN network.
+  - **Note:** This file only contains the algorithm of the CNN network and is not meant to be executed directly.
+
+- **`./partB/model.py`** 🤖  
+  - Implements the **ResNet50 Model**.
+  - Contains the `Pretrained` class with methods like `forward`, `train_network`, etc.
   - The code is modular, allowing easy modifications to the neural network.
-  - **Note:** This file only contains the algorithm of the neural network and is not meant to be executed directly.
+  - **Note:** This file only contains the algorithm of the ResNet50 network and is not meant to be executed directly. There is three way to train the model, all the three ways are mentioned below.
 
 - **`run_sweep_net.py`** 🤖  
   - This is used to log the selected parameters in the `wandb` platform.
-  - One can check the performance of the neural network on various hyperparameter by running this file and checking the `wandb` site.
+  - One can check the performance of the CNN network on various hyperparameter by running this file and checking the `wandb` site.
   - Currently it logs `train loss`, `train Accuracy`, `validation loss` and `validation accuracy`.
   - One can change the `sweep_config` present inside the code, to check the performance of neural network on different hyperparameters.
 
 
-- **`./partA/train.py`**
+- **`./partA/main.py`**
   - This script is used to train a custom convolutional neural network (CNN) model for image classification on the iNaturalist 12K dataset using configurable hyperparameters. The CNN consists of 5 convolutional blocks followed by a dense layer and an output layer. Each block contains a Conv2D -> Activation -> MaxPool2D structure. 
   - Adjustable input image size (square)
   - Configurable number and organization of filters in convolutional layers
@@ -116,7 +119,7 @@ These files contain the essential code for building and running the neural netwo
       | `--log_wandb` `(-logw)`       | Enable logging to wandb (True/False). |
 
 
- - **`./partB/train.py`**
+ - **`./partB/main.py`**
    
     - This script provides a command-line interface (CLI) to fine-tune a pretrained ResNet50 model on the iNaturalist 12K dataset using various training strategies. You can train the full network, freeze the earlier layers, or gradually unfreeze deeper layers. The model is trained using the `PretrainedModel` class, and the dataset is loaded via the `load_dataset` utility.
     - Supports training the full network, fine-tuning only the last layer, or gradual unfreezing of layers.
@@ -143,3 +146,63 @@ These files contain the essential code for building and running the neural netwo
       | `--patience_counter` `(-pc)`     | Early stopping patience. |
       | `--save_model` `(--save_model)`  | Whether to save the trained model after training. |
       | `--log_wandb` `(-logw)`          | Whether to log training metrics to WandB. |
+
+
+## 🚀 Training the Neural Network
+
+Before training the model you need to create a `models/` directory in both the folder i.e `/pathA` and `/pathB`
+```bash
+cd ./partA
+mkdir models
+```
+```bash
+cd ./partB
+mkdir models
+```
+
+First install the necessary dependencies
+```bash
+pip3 install -r requirements.txt
+```
+
+To train the CNN (from sratch), run the following command:
+
+```bash
+cd ./partA/
+python train.py
+```
+
+To train the CNN (with user input), run the following command:
+
+```bash
+python main.py -wp dl-assignment2 -we cs24s031-indian-institute-of-technology-madras --input_shape 400 -f_org double -n_filters 64 -data_aug True -bn True -do 0.3 -ls 2048 -e 20 -b 32 -lr 1e-5 -w_d 0.0005 -a gelu --output_classes 10 -pc 10 --save_model True --log_wandb True
+```
+
+After the training , run the following command to test it
+```bash
+python test.py
+```
+
+
+To train the ResNet50 (with default config), run the following command:
+
+```bash
+cd ./partB/
+python train.py
+```
+
+To train the CNN (with user input), run the following command:
+
+```bash
+python main.py -wp dl-assignment2 -we cs24s031-indian-institute-of-technology-madras --input_shape 400 -data_aug True -e 20 -b 32 -lr 1e-5 -w_d 0.0005 --output_classes 10 -pc 10 --save_model True --log_wandb True -t_method last_layer
+```
+
+After the training , run the following command to test it
+```bash
+python test.py
+```
+
+
+
+
+
